@@ -1,6 +1,6 @@
+import { listOf } from '../utils';
 import { makeParties } from './parties';
 import { makeVoter } from './voter';
-import { listOf } from './utils';
 
 const VOTERS_IN_DISTRICT = 100;
 const DISTRICTS_IN_ELECTORATE = 50;
@@ -15,10 +15,13 @@ function makeDistrict(parties) {
 export function makeElectorate() {
   const parties = makeParties();
 
-  return listOf(
-    () => makeDistrict(parties),
-    DISTRICTS_IN_ELECTORATE
-  );
+  return Map({
+    parties,
+    districts: listOf(
+      () => makeDistrict(parties),
+      DISTRICTS_IN_ELECTORATE
+    )
+  });
 }
 
 function runDistrictElection(district) {

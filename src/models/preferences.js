@@ -1,4 +1,5 @@
-import { listOf, randomFloat } from './utils';
+import { Map } from 'immutable';
+import { listOf, randomFloat } from '../utils';
 
 export function makePreferences(parties) {
   const payoffs = listOf(
@@ -6,19 +7,16 @@ export function makePreferences(parties) {
     parties.count()
   );
 
-  return Map(
-    parties
-      .map(party => party.get("id"))
-      .zip(payoffs)
-      .mapEntries(
-        (k, v) => [
-          k,
-          Map({
-            partyId: k,
-            payoff: v
-          })
-        ]
-      )
+  return (
+    parties.mapEntries(
+      ([partyId, ...rest], i) => [
+        partyId,
+        Map({
+          partyId,
+          payoff: payoffs.get(i)
+        })
+      ]
+    )
   );
 }
 
