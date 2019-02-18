@@ -1,35 +1,35 @@
 import { List, Map } from 'immutable';
-import { weightedMovingAverage } from './utils';
+import { weightedMovingAverage } from '../utils';
 
 export function makeHistory() {
   return List();
 }
 
 function getResults(parties, votes) {
-  const partyIds = Set.fromKeys(parties);
-
   return (
-    votes
-      .groupBy(partyId => partyId)
-      .map(votes => votes.count())
-      .filter(
-        (count, partyId) => partyIds.includes(partyId)
-      )
-      .mapEntries(
-        (partyId, count) => ([
+    parties.mapEntries(
+      ([partyId, ...rest]) => {
+        const count = (
+          votes
+            .filter(vote => vote === partyId)
+            .count()
+        );
+
+        return [
           partyId,
           Map({
             partyId,
             winPercentage: (count / votes.count())
           })
-        ])
-      )
+        ];
+      }
+    )
   );
 }
 
 export function extendHistory(history, parties, votes) {
   return (
-    List.unshift(
+    history.unshift(
       getResults(parties, votes)
     )
   );
@@ -42,7 +42,7 @@ export function getLastStats(history) {
 export function getRollingStats(history, parties) {
   return (
     parties.mapEntries(
-      partyId => [
+      ([partyId, ...rest]) => [
         partyId,
         Map({
           partyId,
@@ -51,7 +51,11 @@ export function getRollingStats(history, parties) {
               history
                 .get(i)
                 .get(partyId)
-                .get("winPercentage")
+                .get('winPercentage')
+            ),
+            Math.min(
+              history.count(),
+              10
             )
           )
         })
