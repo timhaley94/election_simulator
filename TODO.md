@@ -1,5 +1,4 @@
 TODO
-- Set up netlify
 - Set up coverage badges
 - Improve the look of the graph
 - Improve the look of the controls
