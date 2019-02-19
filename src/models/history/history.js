@@ -1,5 +1,5 @@
 import { List, Map } from 'immutable';
-import { weightedMovingAverage } from '../utils';
+import { weightedMovingAverage } from '../../utils';
 
 export function makeHistory() {
   return List();

@@ -1,5 +1,5 @@
 import { List, Set } from 'immutable';
-import { makeParties } from './parties';
+import { makeParties } from '../parties/parties';
 import {
   makeHistory,
   extendHistory,

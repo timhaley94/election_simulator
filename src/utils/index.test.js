@@ -64,4 +64,11 @@ describe('weightedMovingAverage', () => {
       weightedMovingAverage(i => values[i], 6)
     ).toBeGreaterThan(1.5)
   });
+
+  it('handles single entry', () => {
+    const values = [2];
+    expect(
+      weightedMovingAverage(i => values[i], 1)
+    ).toBe(2)
+  });
 });

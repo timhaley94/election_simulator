@@ -1,5 +1,5 @@
 import { Map } from 'immutable';
-import { listOf, randomFloat } from '../utils';
+import { listOf, randomFloat } from '../../utils';
 
 export function makePreferences(parties) {
   const payoffs = listOf(
