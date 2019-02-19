@@ -1,6 +1,4 @@
 TODO
-- Set up code climate
-- Set up Circle CI
 - Set up netlify
 - Set up coverage badges
 - Improve the look of the graph
