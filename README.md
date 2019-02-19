@@ -4,7 +4,7 @@ This project seeks to simulate and visualize elections in ["first passed the pos
 Long story short, if you believe that voters act rationally, then, according to the math, FPTP guarantees your democracy will descend into an us/then flamewar.
 
 ### Special Thanks
-This project was largely inspired by [a youtube series about election systems](https://www.youtube.com/watch?v=s7tWHJfhiyo&list=PL7679C7ACE93A5638) and [Nicky Case's](https://ncase.me/) fantastic ["the evolution of trust"](https://ncase.me/trust/).
+This project was largely inspired by ["Politics in the Animal Kingdom"](https://www.youtube.com/watch?v=s7tWHJfhiyo&list=PL7679C7ACE93A5638) and [Nicky Case's](https://ncase.me/) fantastic ["the evolution of trust"](https://ncase.me/trust/).
 
 ### Installation
 Make sure you have a recent version of [node](https://nodejs.org/en/) (this app was written with v8.11.2), then run `npm install`.
