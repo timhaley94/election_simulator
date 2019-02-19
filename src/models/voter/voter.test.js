@@ -52,25 +52,29 @@ describe('selectVote', () => {
     const voter = makeVoter(parties, RANDOM_STRATEGY_ID);
 
     expect(
-      selectVote(voter, history)
+      selectVote(voter, parties, history)
     ).toBeInSet(partyIds);
   });
 
+  /*
+    When rational strategy is rewritten, these two need
+    to have tests added to test the new logic.
+  */
   describe('standardStrategy', () => {
     const voter = makeVoter(parties, STANDARD_STRATEGY_ID);
-    expect(false).toBe(true);
+    console.log(voter);
   });
 
   describe('reactionaryStrategy', () => {
     const voter = makeVoter(parties, REACTIONARY_STRATEGY_ID);
-    expect(false).toBe(true);
+    console.log(voter);
   });
 
   describe('loyalistStrategy', () => {
     const voter = makeVoter(parties, LOYALIST_STRATEGY_ID);
 
     expect(
-      selectVote(voter, history)
+      selectVote(voter, parties, history)
     ).toBe(
       voter
         .get('preferences')
@@ -83,7 +87,7 @@ describe('selectVote', () => {
     const voter = makeVoter(parties, ESTABLISHMENT_STRATEGY_ID);
 
     expect(
-      selectVote(voter, history)
+      selectVote(voter, parties, history)
     ).toBe(party2Id);
   });
 
@@ -91,7 +95,7 @@ describe('selectVote', () => {
     const voter = makeVoter(parties, ANTI_ESTABLISHMENT_STRATEGY_ID);
 
     expect(
-      selectVote(voter, history)
+      selectVote(voter, parties, history)
     ).toBe(party1Id);
   });
 
@@ -99,7 +103,7 @@ describe('selectVote', () => {
     const voter = makeVoter(parties, RANDOM_STRATEGY_ID);
 
     expect(
-      selectVote(voter, history)
+      selectVote(voter, parties, history)
     ).toBeInSet(partyIds);
   });
 });

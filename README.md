@@ -15,4 +15,4 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 so the usual suspects work:
 - `npm start` to start the development server
 - `npm test` to start the test runner
-- `npm build` to build the production site]
+- `npm build` to build the production site
