@@ -1,6 +1,6 @@
 import { Set } from 'immutable';
 import { makeParties } from '../parties/parties';
-import { makePreferences, getPayoff } from './preferences';
+import { makePreferences } from './preferences';
 
 describe('makePreferences', () => {
   const parties = makeParties();
@@ -43,21 +43,5 @@ describe('makePreferences', () => {
         expect(payoff <= 1).toBe(true);
       }
     );
-  });
-});
-
-describe('getPayoff', () => {
-  it('accesses value correctly', () => {
-    const parties = makeParties();
-    const preferences = makePreferences(parties);
-
-    parties.forEach(
-      party => {
-        const payoff = getPayoff(preferences, party.get("id"));
-
-        expect(payoff >= -1).toBe(true);
-        expect(payoff <= 1).toBe(true);
-      }
-    )
   });
 });

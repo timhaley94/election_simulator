@@ -1,9 +1,8 @@
 import { Map, Set } from 'immutable';
-import { makePreferences, getPayoff } from '../preferences/preferences';
+import { makePreferences } from '../preferences/preferences';
 import { getRollingStats, getLastStats } from '../history/history';
 
 export const STANDARD_STRATEGY_ID = 'voting-strategy/rational';
-export const REACTIONARY_STRATEGY_ID = 'voting-strategy/reactionary';
 export const LOYALIST_STRATEGY_ID = 'voting-strategy/loyalist';
 export const ESTABLISHMENT_STRATEGY_ID = 'voting-strategy/establishment';
 export const ANTI_ESTABLISHMENT_STRATEGY_ID = 'voting-strategy/anti-establishment';
@@ -11,60 +10,70 @@ export const RANDOM_STRATEGY_ID = 'voting-strategy/random';
 
 export const strategyIds = Set([
   STANDARD_STRATEGY_ID,
-  REACTIONARY_STRATEGY_ID,
   LOYALIST_STRATEGY_ID,
   ESTABLISHMENT_STRATEGY_ID,
   ANTI_ESTABLISHMENT_STRATEGY_ID,
   RANDOM_STRATEGY_ID
 ]);
 
-function getWeighedPayoff(voter, partyId, winPercentage) {
-  const payoff = getPayoff(
-    voter.get("preferences"),
-    partyId
-  );
-
-  return payoff * winPercentage;
-}
-
-function rationalStrategy(voter, results) {
-  /*
-    the math on this "rational" strategy is'
-    wrong. This has them voting on weighted
-    payoff instead of voting to maximize
-    estimated return.
-  */
-  return (
-    results
-      .maxBy(
-        result => getWeighedPayoff(
-          voter,
-          result.get("partyId"),
-          result.get("winPercentage")
-        )
-      )
-      .get("partyId")
-  );
-}
-
 function standardStrategy(voter, history, parties) {
   if (history.count() === 0) {
     return loyalistStrategy(voter, history);
   }
 
-  return rationalStrategy(
-    voter,
-    getRollingStats(history, parties)
-  );
-}
+  /*
+    HEYYYYY
 
-function reactionaryStrategy(voter, history) {
-  if (history.count() === 0) {
+    here's what you need to do:
+    instead of bestChance do secondBestChance
+    and make the cut off based on that. This
+    handles the scenario where only one party
+    is likely to win.
+  */
+
+  const stats = getRollingStats(history, parties)
+
+  const secondBestChance = (
+    stats
+      .toList()
+      .sortBy(stat => stat.get('winPercentage'))
+      .get(1)
+      .get('winPercentage')
+  );
+
+  const cuttoff = secondBestChance - 0.8;
+  const competitiveParties = (
+    stats
+      .filter(stat => stat.get('winPercentage') >= cuttoff)
+      .mapEntries(
+        ([partyId, stat]) => [
+          partyId,
+          stat.set(
+            'payoff',
+            voter
+              .get('preferences')
+              .get(partyId)
+              .get('payoff')
+          )
+        ]
+      )
+  );
+
+  if (competitiveParties.count() <= 1) {
     return loyalistStrategy(voter, history);
   }
 
-  return rationalStrategy(
-    getLastStats(history)
+  const worstPayoff = (
+    competitiveParties
+      .minBy(party => party.get('payoff'))
+      .get('payoff')
+  );
+
+  return (
+    competitiveParties
+      .map(party => party.update('payoff', p => p - worstPayoff))
+      .maxBy(party => party.get('payoff') * party.get('winPercentage'))
+      .get('partyId')
   );
 }
 
@@ -117,8 +126,6 @@ function getStrategy(id) {
   switch (id) {
     case STANDARD_STRATEGY_ID:
       return standardStrategy;
-    case REACTIONARY_STRATEGY_ID:
-      return reactionaryStrategy;
     case LOYALIST_STRATEGY_ID:
       return loyalistStrategy;
     case ESTABLISHMENT_STRATEGY_ID:

@@ -19,7 +19,3 @@ export function makePreferences(parties) {
     )
   );
 }
-
-export function getPayoff(preferences, partyId) {
-  return preferences.get(partyId).get("payoff");
-}

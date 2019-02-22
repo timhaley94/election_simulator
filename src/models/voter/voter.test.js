@@ -2,8 +2,7 @@ import { listOf } from '../../utils';
 import { makeParties } from '../parties/parties';
 import { makeHistory, extendHistory } from '../history/history';
 import {
-  STANDARD_STRATEGY_ID,
-  REACTIONARY_STRATEGY_ID,
+  // STANDARD_STRATEGY_ID,
   LOYALIST_STRATEGY_ID,
   ESTABLISHMENT_STRATEGY_ID,
   ANTI_ESTABLISHMENT_STRATEGY_ID,
@@ -56,19 +55,37 @@ describe('selectVote', () => {
     ).toBeInSet(partyIds);
   });
 
-  /*
-    When rational strategy is rewritten, these two need
-    to have tests added to test the new logic.
-  */
-  describe('standardStrategy', () => {
-    const voter = makeVoter(parties, STANDARD_STRATEGY_ID);
-    console.log(voter);
-  });
-
-  describe('reactionaryStrategy', () => {
-    const voter = makeVoter(parties, REACTIONARY_STRATEGY_ID);
-    console.log(voter);
-  });
+  // describe('standardStrategy', () => {
+  //   const parties = makeParties(3);
+  //   const [id1, id2, id3] = parties.map(party => party.get('id')).toList();
+  //   const voter = makeVoter(parties, STANDARD_STRATEGY_ID);
+  //
+  //   const testStandardStrategy = (counts, expected) => {
+  //     const history = extendHistory(
+  //       makeHistory(),
+  //       parties,
+  //       (
+  //         parties
+  //           .toList()
+  //           .map(
+  //             party => listOf(
+  //               () => party.get('id'),
+  //               counts[party.get('id')]
+  //             )
+  //           )
+  //           .flatten(1)
+  //       )
+  //     );
+  //
+  //     expect(
+  //       selectVote(voter, parties, history)
+  //     ).toBe(expected);
+  //   };
+  //
+  //   it('', () => {
+  //
+  //   })
+  // });
 
   describe('loyalistStrategy', () => {
     const voter = makeVoter(parties, LOYALIST_STRATEGY_ID);
