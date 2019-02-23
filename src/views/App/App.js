@@ -7,52 +7,29 @@ import styles from './App.module.scss';
 import './index.css';
 
 const App = () => {
-  const [isInitializing, setIsInitializing] = useState(true);
-  const [simulation, setSimulation] = useState(null);
-  const {
-    isRunning,
-    tick,
-    start,
-    stop,
-    step,
-    reset: resetTicker
-  } = useTicker(30);
+  const iterations = 30;
 
-  const results = (
-    isInitializing
-      ? null
-      : (
-        simulation
-          .get('history')
-          .reverse()
-          .get(tick)
-      )
-  );
+  const [simulation, setSimulation] = useState(null);
+  const { tick, reset: resetTicker } = useTicker(iterations);
 
   const reset = () => {
-    setIsInitializing(true);
-    resetTicker(30);
-    setSimulation(simulate({ iterations: 30 }));
-    setIsInitializing(false);
+    setSimulation(simulate(iterations));
+    resetTicker(iterations);
   }
 
   useOnMount(reset);
 
   return (
     <div className={ styles.container }>
+      <Graph
+        tick={ tick }
+        iterations={ iterations }
+        history={ simulation ? simulation.get('history') : null }
+      />
       <Controls
-        isInitializing={ isInitializing }
-        isRunning={ isRunning }
-        start={ start }
-        stop={ stop }
-        step={
-          simulation && (step + 1 < 30)
-          ? step
-          : null
-        }
+        isInitializing={ !simulation }
         reset={ reset }
       />
-      <Graph results={ results } />
     </div>
   );
 }

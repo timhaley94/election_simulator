@@ -1,25 +1,64 @@
-import { Map, Repeat } from 'immutable';
+import { List, Map, Repeat } from 'immutable';
 import { listOf } from '../../utils';
 import { makeParties } from '../parties/parties';
 import {
   makeVoter,
   selectVote,
-  STANDARD_STRATEGY_ID
+  STANDARD_STRATEGY_ID,
+  LOYALIST_STRATEGY_ID,
+  ESTABLISHMENT_STRATEGY_ID,
+  ANTI_ESTABLISHMENT_STRATEGY_ID,
+  RANDOM_STRATEGY_ID
 } from '../voter/voter';
 import { makeHistory, extendHistory } from '../history/history';
 
-export const DEFAULT_VOTERS_IN_ELECTORATE = 100;
+const DEFAULT_VOTER_TYPE_DISTRIBUTION = {
+  standard: 75,
+  loyalist: 5,
+  establishment: 5,
+  antiEstablishment: 10,
+  random: 5
+};
 
-export function makeElectorate(voterCount = DEFAULT_VOTERS_IN_ELECTORATE) {
+export function makeElectorate({ voterTypeDistribution }) {
+  const {
+    standard,
+    loyalist,
+    establishment,
+    antiEstablishment,
+    random
+  } = voterTypeDistribution || DEFAULT_VOTER_TYPE_DISTRIBUTION;
+
   const parties = makeParties();
+  const voters = (
+    List([
+      listOf(
+        () => makeVoter(parties, STANDARD_STRATEGY_ID),
+        standard
+      ),
+      listOf(
+        () => makeVoter(parties, LOYALIST_STRATEGY_ID),
+        loyalist
+      ),
+      listOf(
+        () => makeVoter(parties, ESTABLISHMENT_STRATEGY_ID),
+        establishment
+      ),
+      listOf(
+        () => makeVoter(parties, ANTI_ESTABLISHMENT_STRATEGY_ID),
+        antiEstablishment
+      ),
+      listOf(
+        () => makeVoter(parties, RANDOM_STRATEGY_ID),
+        random
+      )
+    ]).flatten(1)
+  );
 
   return Map({
     parties,
-    history: makeHistory(),
-    voters: listOf(
-      () => makeVoter(parties, STANDARD_STRATEGY_ID),
-      voterCount
-    )
+    voters,
+    history: makeHistory()
   });
 }
 
@@ -40,12 +79,14 @@ export function runElection(electorate) {
   );
 }
 
-export function simulate({ iterations } = { iterations: 30 }) {
+export function simulate(iterations, voterTypeDistribution) {
   return (
     Repeat(null, iterations)
       .reduce(
         electorate => runElection(electorate),
-        makeElectorate()
+        makeElectorate({
+          voterTypeDistribution
+        })
       )
   );
 }

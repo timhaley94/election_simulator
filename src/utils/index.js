@@ -4,7 +4,7 @@ export function listOf(fn, length) {
   return (
     Repeat(null, length)
       .toList()
-      .map(fn)
+      .map((value, i) => fn(i))
   )
 }
 

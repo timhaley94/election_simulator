@@ -23,47 +23,20 @@ Button.defaultProps = {
   children: null
 };
 
-const Controls = ({
-  isInitializing,
-  isRunning,
-  start,
-  stop,
-  step,
-  reset
-}) => (
+const Controls = ({ isInitializing, reset }) => (
   <div>
-    <Button
-      disabled={ isInitializing }
-      onClick={ isRunning ? stop : start }
-    >
-      { isRunning ? 'Stop' : 'Start'}
-    </Button>
-    <Button
-      disabled={ isInitializing || isRunning || !step }
-      onClick={ step }
-    >
-      Step
-    </Button>
     <Button
       disabled={ isInitializing }
       onClick={ reset }
     >
-      Reset
+      Simulate
     </Button>
   </div>
 );
 
 Controls.propTypes = {
   isInitializing: PropTypes.bool.isRequired,
-  isRunning: PropTypes.bool.isRequired,
-  start: PropTypes.func.isRequired,
-  stop: PropTypes.func.isRequired,
-  step: PropTypes.func,
   reset: PropTypes.func.isRequired
-};
-
-Controls.defaultProps = {
-  step: null
 };
 
 export default Controls;

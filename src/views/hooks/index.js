@@ -70,6 +70,7 @@ export function useTicker(initialLength) {
     stop();
     setLength(nextLength);
     setTick(0);
+    start();
   };
 
   return {
