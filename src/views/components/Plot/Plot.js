@@ -27,7 +27,7 @@ const Plot = ({
         <YAxis />
         { children }
       </XYPlot>
-      <Legend items={ legend } />
+      <Legend { ...legend } />
     </div>
     <p className={ styles.xAxisLabel }>{ xAxisTitle }</p>
   </Centered>
@@ -36,7 +36,7 @@ const Plot = ({
 Plot.propTypes = {
   xAxisTitle: PropTypes.string.isRequired,
   yAxisTitle: PropTypes.string.isRequired,
-  legend: PropTypes.array.isRequired,
+  legend: PropTypes.object.isRequired,
   children: PropTypes.node.isRequired
 };
 

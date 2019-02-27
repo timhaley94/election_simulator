@@ -3,22 +3,24 @@ import PropTypes from 'prop-types';
 import { List, Map } from 'immutable';
 import { Crosshair, LineSeries } from 'react-vis';
 import { listOf } from '../../../utils';
-import { Legend, Plot } from '../../components';
+import { Plot } from '../../components';
 
-const Simulation = ({ tick, iterations, history: rawHistory }) => {
+const Simulation = ({
+  tick,
+  iterations,
+  parties: rawParties,
+  history: rawHistory
+}) => {
   const [crosshairValues, setCrosshairValues] = useState([]);
 
   if (!rawHistory) {
     return null;
   }
 
-  const partyIds = (
-    rawHistory
-      .get(0)
+  const parties = (
+    rawParties
       .toList()
-      .map(party => party.get('partyId'))
-      .sortBy(id => id)
-      .toJS()
+      .sortBy(party => party.get('id'))
   );
 
   const history = (
@@ -36,20 +38,25 @@ const Simulation = ({ tick, iterations, history: rawHistory }) => {
 
     if (i >= 1 && i <= tick) {
       setCrosshairValues(
-        partyIds.map(
-          id => (
-            entry
-              .get(id)
-              .get('winPercentage')
+        parties
+          .map(
+            party => (
+              entry
+                .get(party.get('id'))
+                .get('winPercentage')
+            )
           )
-        )
+          .toJS()
       );
     } else {
       setCrosshairValues([]);
     }
   };
 
-  const renderSeries = (partyId, isFirst) => {
+  const renderSeries = (party, isFirst) => {
+    const id = party.get('id');
+    const color = party.get('color');
+
     const data = (
       history
         .map(
@@ -57,7 +64,7 @@ const Simulation = ({ tick, iterations, history: rawHistory }) => {
             x: i + 1,
             y: (
               value
-                .get(partyId)
+                .get(id)
                 .get('winPercentage')
             )
           })
@@ -77,8 +84,9 @@ const Simulation = ({ tick, iterations, history: rawHistory }) => {
 
     return (
       <LineSeries
-        key={ `line-series--${partyId}` }
+        key={ `line-series--${id}` }
         curve="curveLinear"
+        color={ color }
         onNearestX={ isFirst ? onNearestX : null }
         getNull={({ y }) => y !== null}
         data={[ ...data, ...nullValues ]}
@@ -91,23 +99,28 @@ const Simulation = ({ tick, iterations, history: rawHistory }) => {
       width={ 650 }
       height={ 300 }
       xAxisTitle="Election Number"
-      yAxisTitle="Percentage of Votes"
+      yAxisTitle="Percent of Votes"
       xDomain={[1, iterations]}
       yDomain={[0, 1]}
       onMouseLeave={ onMouseLeave }
-      legend={
-        partyIds.map(
-          id => ({
-            name: id,
-            color: '#4577a5'
-          })
+      legend={{
+        title: "Parties",
+        items: (
+          parties
+            .map(
+              party => ({
+                name: party.get('id'),
+                color: party.get('color')
+              })
+            )
+            .toJS()
         )
-      }
+      }}
     >
       <Crosshair values={ crosshairValues } />
       {
-        partyIds.map(
-          (id, i) => renderSeries(id, i === 0)
+        parties.map(
+          (party, i) => renderSeries(party, i === 0)
         )
       }
     </Plot>

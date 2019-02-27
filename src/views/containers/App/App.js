@@ -47,6 +47,7 @@ const App = () => {
         tick={ tick }
         iterations={ iterations }
         history={ simulation.get('history') }
+        parties={ simulation.get('parties') }
       />
       <Controls
         weights={ simulation.get('voterTypeDistribution') }

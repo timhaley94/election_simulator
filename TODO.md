@@ -1,10 +1,9 @@
 TODO
 - Add copy
-- Add legend
+- Make party colors match vegetables
 - Switch to just in time computation
 - Get rid of iteration cap
 - Fix crosshair
-- Improve the look of the graph
 - Improve the look of the controls
 - Help text for each voter strategy
 - Write up title and body content

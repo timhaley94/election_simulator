@@ -9,14 +9,6 @@ it('respects the DEFAULT_PARTY_COUNT variable', () => {
   );
 });
 
-it('respects the length argument', () => {
-  expect(
-    makeParties(11).count()
-  ).toBe(
-    11
-  );
-});
-
 it('creates unique ids', () => {
   const parties = makeParties();
   let ids = Set();
