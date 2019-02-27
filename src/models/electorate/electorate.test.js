@@ -1,7 +1,6 @@
 import {
   makeElectorate,
-  runElection,
-  DEFAULT_VOTERS_IN_ELECTORATE
+  runElection
 } from './electorate';
 
 describe('makeElectorate', () => {
@@ -23,18 +22,10 @@ describe('makeElectorate', () => {
     ).toHave('voters');
   });
 
-  it('can use DEFAULT_VOTERS_IN_ELECTORATE', () => {
+  it('has weights', () => {
     expect(
-      makeElectorate().get('voters').count()
-    ).toBe(DEFAULT_VOTERS_IN_ELECTORATE);
-  });
-
-  it('respects voterCount argument', () => {
-    expect(
-      makeElectorate(
-        DEFAULT_VOTERS_IN_ELECTORATE + 1
-      ).get('voters').count()
-    ).toBe(DEFAULT_VOTERS_IN_ELECTORATE + 1);
+      makeElectorate()
+    ).toHave('voterTypeDistribution');
   });
 });
 
