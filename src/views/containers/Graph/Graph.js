@@ -1,16 +1,9 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import { List, Map } from 'immutable';
-import {
-  XYPlot,
-  XAxis,
-  YAxis,
-  HorizontalGridLines,
-  VerticalGridLines,
-  Crosshair,
-  LineSeries
-} from 'react-vis';
+import { Crosshair, LineSeries } from 'react-vis';
 import { listOf } from '../../../utils';
+import { Plot } from '../../components';
 
 const Simulation = ({ tick, iterations, history: rawHistory }) => {
   const [crosshairValues, setCrosshairValues] = useState([]);
@@ -94,24 +87,22 @@ const Simulation = ({ tick, iterations, history: rawHistory }) => {
   }
 
   return (
-    <XYPlot
+    <Plot
       width={ 650 }
       height={ 300 }
+      xAxisTitle="Election Number"
+      yAxisTitle="Percentage of Votes"
       xDomain={[1, iterations]}
       yDomain={[0, 1]}
       onMouseLeave={ onMouseLeave }
     >
-      <HorizontalGridLines />
-      <VerticalGridLines />
-      <XAxis />
-      <YAxis />
       <Crosshair values={ crosshairValues } />
       {
         partyIds.map(
           (id, i) => renderSeries(id, i === 0)
         )
       }
-    </XYPlot>
+    </Plot>
   );
 };
 

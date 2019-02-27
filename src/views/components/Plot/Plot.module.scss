@@ -1,0 +1,19 @@
+.plotContainer {
+  margin-top: 10px;
+}
+
+%axisLabel {
+  color: #6b6b76;
+  font-size: 11px;
+  margin: 0;
+}
+
+.xAxisLabel {
+  @extend %axisLabel;
+  align-self: flex-end;
+}
+
+.yAxisLabel {
+  @extend %axisLabel;
+  align-self: flex-start;
+}
