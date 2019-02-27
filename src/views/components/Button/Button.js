@@ -23,20 +23,4 @@ Button.defaultProps = {
   children: null
 };
 
-const Controls = ({ isInitializing, reset }) => (
-  <div>
-    <Button
-      disabled={ isInitializing }
-      onClick={ reset }
-    >
-      Simulate
-    </Button>
-  </div>
-);
-
-Controls.propTypes = {
-  isInitializing: PropTypes.bool.isRequired,
-  reset: PropTypes.func.isRequired
-};
-
-export default Controls;
+export default Button;

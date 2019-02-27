@@ -1,1 +1,1 @@
-export { simulate as default } from './electorate/electorate';
+export { simulate, setWeight } from './electorate/electorate';

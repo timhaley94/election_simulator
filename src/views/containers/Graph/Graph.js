@@ -10,7 +10,7 @@ import {
   Crosshair,
   LineSeries
 } from 'react-vis';
-import { listOf } from '../../utils';
+import { listOf } from '../../../utils';
 
 const Simulation = ({ tick, iterations, history: rawHistory }) => {
   const [crosshairValues, setCrosshairValues] = useState([]);

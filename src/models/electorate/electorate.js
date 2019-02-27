@@ -12,24 +12,51 @@ import {
 } from '../voter/voter';
 import { makeHistory, extendHistory } from '../history/history';
 
-const DEFAULT_VOTER_TYPE_DISTRIBUTION = {
-  standard: 75,
-  loyalist: 5,
-  establishment: 5,
-  antiEstablishment: 10,
-  random: 5
-};
+const DEFAULT_VOTER_DISTRIBUTION = (
+  List([
+    Map({
+      name: '"Rational"',
+      type: 'standard',
+      value: 75
+    }),
+    Map({
+      name: 'Loyalist',
+      type: 'loyalist',
+      value: 5
+    }),
+    Map({
+      name: 'Establishment',
+      type: 'establishment',
+      value: 5
+    }),
+    Map({
+      name: 'Anti-Establishment',
+      type: 'antiEstablishment',
+      value: 10
+    }),
+    Map({
+      name: 'Random',
+      type: 'random',
+      value: 5
+    })
+  ])
+);
 
-export function makeElectorate({ voterTypeDistribution }) {
-  const {
-    standard,
-    loyalist,
-    establishment,
-    antiEstablishment,
-    random
-  } = voterTypeDistribution || DEFAULT_VOTER_TYPE_DISTRIBUTION;
+export function makeElectorate(voterTypeDistribution = DEFAULT_VOTER_DISTRIBUTION) {
+  const findWeight = type => (
+    voterTypeDistribution
+      .find(entry => entry.get('type') === type)
+      .get('value')
+  );
+
+  const standard = findWeight('standard');
+  const loyalist = findWeight('loyalist');
+  const establishment = findWeight('establishment');
+  const antiEstablishment = findWeight('antiEstablishment');
+  const random = findWeight('random');
 
   const parties = makeParties();
+
   const voters = (
     List([
       listOf(
@@ -58,6 +85,7 @@ export function makeElectorate({ voterTypeDistribution }) {
   return Map({
     parties,
     voters,
+    voterTypeDistribution,
     history: makeHistory()
   });
 }
@@ -84,9 +112,25 @@ export function simulate(iterations, voterTypeDistribution) {
     Repeat(null, iterations)
       .reduce(
         electorate => runElection(electorate),
-        makeElectorate({
-          voterTypeDistribution
-        })
+        makeElectorate(voterTypeDistribution)
       )
+  );
+}
+
+export function setWeight(
+  electorate,
+  type,
+  value
+) {
+  return (
+    electorate.update(
+      'voterTypeDistribution',
+      distro => (
+        distro.update(
+          distro.findIndex(entry => entry.get('type') === type),
+          entry => entry.set('value', value)
+        )
+      )
+    )
   );
 }
