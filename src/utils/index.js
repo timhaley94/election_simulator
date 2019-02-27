@@ -24,3 +24,7 @@ export function weightedMovingAverage(getValue, n = 10) {
       .reduce((acc, val) => acc + val)
   );
 }
+
+export function capitalizeFirstLetter(s) {
+  return s.charAt(0).toUpperCase() + s.slice(1);
+}

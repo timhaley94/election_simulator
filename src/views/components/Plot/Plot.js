@@ -7,12 +7,13 @@ import {
   XAxis,
   YAxis
 } from 'react-vis';
-import { Centered } from '..';
+import { Centered, Legend } from '..';
 import styles from './Plot.module.scss';
 
 const Plot = ({
   xAxisTitle,
   yAxisTitle,
+  legend,
   children,
   ...rest
 }) => (
@@ -26,6 +27,7 @@ const Plot = ({
         <YAxis />
         { children }
       </XYPlot>
+      <Legend items={ legend } />
     </div>
     <p className={ styles.xAxisLabel }>{ xAxisTitle }</p>
   </Centered>
@@ -34,6 +36,7 @@ const Plot = ({
 Plot.propTypes = {
   xAxisTitle: PropTypes.string.isRequired,
   yAxisTitle: PropTypes.string.isRequired,
+  legend: PropTypes.array.isRequired,
   children: PropTypes.node.isRequired
 };
 

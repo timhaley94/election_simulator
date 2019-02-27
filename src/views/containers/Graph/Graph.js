@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { List, Map } from 'immutable';
 import { Crosshair, LineSeries } from 'react-vis';
 import { listOf } from '../../../utils';
-import { Plot } from '../../components';
+import { Legend, Plot } from '../../components';
 
 const Simulation = ({ tick, iterations, history: rawHistory }) => {
   const [crosshairValues, setCrosshairValues] = useState([]);
@@ -95,6 +95,14 @@ const Simulation = ({ tick, iterations, history: rawHistory }) => {
       xDomain={[1, iterations]}
       yDomain={[0, 1]}
       onMouseLeave={ onMouseLeave }
+      legend={
+        partyIds.map(
+          id => ({
+            name: id,
+            color: '#4577a5'
+          })
+        )
+      }
     >
       <Crosshair values={ crosshairValues } />
       {

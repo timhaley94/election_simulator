@@ -1,0 +1,29 @@
+.container {
+  margin: 0;
+  padding: 0;
+  list-style-type: none;
+  position: absolute;
+  top: 18px;
+  right: 18px;
+  border: 2px solid #e6e6e9;
+  padding: 4px 6px;
+  background-color: white;
+}
+
+.item {
+  padding: 2px 0;
+  display: flex;
+  align-items: center;
+}
+
+.color {
+  height: 2px;
+  width: 14px;
+  margin-right: 7px;
+}
+
+.name {
+  color: #6b6b76;
+  font-size: 11px;
+  margin: 0;
+}
