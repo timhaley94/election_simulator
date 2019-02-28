@@ -4,7 +4,7 @@ import { useOnMount, useTicker } from '../../hooks';
 import { ProgressIndicator } from '../../components';
 import { Controls, Graph } from '..';
 import styles from './App.module.scss';
-import './index.css';
+import './index.scss';
 
 const App = () => {
   const iterations = 30;

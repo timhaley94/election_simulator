@@ -28,3 +28,8 @@ export function weightedMovingAverage(getValue, n = 10) {
 export function capitalizeFirstLetter(s) {
   return s.charAt(0).toUpperCase() + s.slice(1);
 }
+
+export function formatPercent(num) {
+  const shifted = ((num/1) * 100).toFixed(0);
+  return `${shifted}%`;
+}

@@ -1,9 +1,10 @@
 TODO
 - Add copy
+- Improve look of ProgressIndicator
+- Improve look of Tooltip
 - Make party colors match vegetables
 - Switch to just in time computation
 - Get rid of iteration cap
-- Fix crosshair
 - Improve the look of the controls
 - Help text for each voter strategy
 - Write up title and body content

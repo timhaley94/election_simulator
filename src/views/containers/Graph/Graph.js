@@ -1,7 +1,6 @@
-import React, { useState } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import { List, Map } from 'immutable';
-import { Crosshair, LineSeries } from 'react-vis';
 import { listOf } from '../../../utils';
 import { Plot } from '../../components';
 
@@ -11,8 +10,6 @@ const Simulation = ({
   parties: rawParties,
   history: rawHistory
 }) => {
-  const [crosshairValues, setCrosshairValues] = useState([]);
-
   if (!rawHistory) {
     return null;
   }
@@ -29,31 +26,7 @@ const Simulation = ({
       .slice(0, tick + 1)
   );
 
-  const onMouseLeave = () => {
-    setCrosshairValues([]);
-  };
-
-  const onNearestX = (value, { index: i }) => {
-    const entry = history.get(i - 1);
-
-    if (i >= 1 && i <= tick) {
-      setCrosshairValues(
-        parties
-          .map(
-            party => (
-              entry
-                .get(party.get('id'))
-                .get('winPercentage')
-            )
-          )
-          .toJS()
-      );
-    } else {
-      setCrosshairValues([]);
-    }
-  };
-
-  const renderSeries = (party, isFirst) => {
+  const getSeries = party => {
     const id = party.get('id');
     const color = party.get('color');
 
@@ -82,16 +55,15 @@ const Simulation = ({
       ).toJS()
     );
 
-    return (
-      <LineSeries
-        key={ `line-series--${id}` }
-        curve="curveLinear"
-        color={ color }
-        onNearestX={ isFirst ? onNearestX : null }
-        getNull={({ y }) => y !== null}
-        data={[ ...data, ...nullValues ]}
-      />
-    );
+    return Map({
+      id,
+      color,
+      name: id,
+      data: List([
+        ...data,
+        ...nullValues
+      ])
+    });
   }
 
   return (
@@ -102,34 +74,20 @@ const Simulation = ({
       yAxisTitle="Percent of Votes"
       xDomain={[1, iterations]}
       yDomain={[0, 1]}
-      onMouseLeave={ onMouseLeave }
-      legend={{
-        title: "Parties",
-        items: (
-          parties
-            .map(
-              party => ({
-                name: party.get('id'),
-                color: party.get('color')
-              })
-            )
-            .toJS()
-        )
-      }}
-    >
-      <Crosshair values={ crosshairValues } />
-      {
-        parties.map(
-          (party, i) => renderSeries(party, i === 0)
-        )
+      legendTitle="Parties"
+      series={
+        parties
+          .map(getSeries)
+          .toJS()
       }
-    </Plot>
+    />
   );
 };
 
 Simulation.propTypes = {
   tick: PropTypes.number.isRequired,
   iterations: PropTypes.number.isRequired,
+  parties: PropTypes.instanceOf(Map),
   history: PropTypes.instanceOf(List)
 };
 
