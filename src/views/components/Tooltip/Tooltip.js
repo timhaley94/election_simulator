@@ -35,7 +35,7 @@ Tooltip.propTypes = {
   values: PropTypes.arrayOf(
     PropTypes.shape({
       name: PropTypes.string.isRequired,
-      percent: PropTypes.string.isRequired,
+      value: PropTypes.number.isRequired,
     })
   ).isRequired
 }

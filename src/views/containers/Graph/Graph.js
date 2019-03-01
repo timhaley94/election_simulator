@@ -74,6 +74,7 @@ const Simulation = ({
       yAxisTitle="Percent of Votes"
       xDomain={[1, iterations]}
       yDomain={[0, 1]}
+      yTickFormat={ n => Math.floor(n * 100) }
       legendTitle="Parties"
       series={
         parties

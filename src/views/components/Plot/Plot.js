@@ -19,6 +19,7 @@ import styles from './Plot.module.scss';
 const Plot = ({
   xAxisTitle,
   yAxisTitle,
+  yTickFormat,
   legendTitle,
   series,
   ...rest
@@ -29,12 +30,8 @@ const Plot = ({
     setCrosshair(null);
   };
 
-  const onNearestX = ({ x, y }) => {
-    if (!y) {
-      setCrosshair(null);
-    } else {
-      setCrosshair(x);
-    }
+  const onNearestX = ({ x }) => {
+    setCrosshair(x);
   };
 
   const renderSeries = ({ id, color, isFirst, data }) => (
@@ -62,6 +59,10 @@ const Plot = ({
       )
     );
 
+    if (values.some(({ value }) => value === null)) {
+      return null;
+    }
+
     return (
       <Crosshair
         values={
@@ -88,7 +89,7 @@ const Plot = ({
           <HorizontalGridLines />
           <VerticalGridLines />
           <XAxis />
-          <YAxis />
+          <YAxis tickFormat={ yTickFormat } />
           { renderCrosshair() }
           {
             series.map(
@@ -119,6 +120,7 @@ const Plot = ({
 Plot.propTypes = {
   xAxisTitle: PropTypes.string.isRequired,
   yAxisTitle: PropTypes.string.isRequired,
+  yTickFormat: PropTypes.func.isRequired,
   legendTitle: PropTypes.string.isRequired,
   series: PropTypes.arrayOf(
     PropTypes.shape({
