@@ -52,8 +52,9 @@ const Plot = ({
 
     const values = (
       series.map(
-        ({ name, data }) => ({
+        ({ name, color, data }) => ({
           name,
+          color,
           value: data.find(point => point.x === crosshair).y
         })
       )

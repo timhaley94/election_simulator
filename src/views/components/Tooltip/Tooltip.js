@@ -5,22 +5,25 @@ import styles from './Tooltip.module.scss';
 
 const Tooltip = ({ x, values }) => (
   <div className={ styles.container }>
-    <h3 className={ styles.title }>
+    <p className={ styles.title }>
       Election #{ x }
-    </h3>
+    </p>
     <div className={ styles.items }>
       {
         values
           .sort((a, b) => b.value - a.value)
           .map(
-            ({ name, value }) => (
+            ({ name, value, color }) => (
               <div
                 className={ styles.item }
                 key={ `tooltip-item--${name}` }
               >
-                <div className={ styles.color } />
+                <div
+                  className={ styles.color }
+                  style={{ backgroundColor: color }}
+                />
                 <p className={ styles.percent }>
-                  { name }: { formatPercent(value) }
+                  { formatPercent(value) }
                 </p>
               </div>
             )
@@ -36,6 +39,7 @@ Tooltip.propTypes = {
     PropTypes.shape({
       name: PropTypes.string.isRequired,
       value: PropTypes.number.isRequired,
+      color: PropTypes.string.isRequired
     })
   ).isRequired
 }

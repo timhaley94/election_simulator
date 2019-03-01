@@ -1,7 +1,6 @@
 TODO
 - Add copy
 - Improve look of ProgressIndicator
-- Improve look of Tooltip
 - Make party colors match vegetables
 - Switch to just in time computation
 - Get rid of iteration cap
