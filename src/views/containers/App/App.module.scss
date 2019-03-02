@@ -1,5 +1,24 @@
 @import "~react-vis/dist/style";
 
 .container {
-  margin: 20px;
+  margin: 60px 20px 20px 20px;
+}
+
+.intro {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  max-width: 600px;
+  margin: 0 auto 24px auto;
+}
+
+.title {
+
+}
+
+.description {
+  margin: 10px 0;
+  line-height: 1.7;
+  color: #424249;
 }

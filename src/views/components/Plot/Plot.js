@@ -9,11 +9,7 @@ import {
   Crosshair,
   LineSeries
 } from 'react-vis';
-import {
-  Centered,
-  Legend,
-  Tooltip
-} from '..';
+import { Legend, Tooltip } from '..';
 import styles from './Plot.module.scss';
 
 const Plot = ({
@@ -83,24 +79,27 @@ const Plot = ({
   };
 
   return (
-    <Centered>
-      <p className={ styles.yAxisLabel }>{ yAxisTitle }</p>
-      <div className={ styles.plotContainer }>
-        <XYPlot { ...rest } onMouseLeave={ onMouseLeave }>
-          <HorizontalGridLines />
-          <VerticalGridLines />
-          <XAxis />
-          <YAxis tickFormat={ yTickFormat } />
-          { renderCrosshair() }
-          {
-            series.map(
-              (s, i) => renderSeries({
-                ...s,
-                isFirst: i === 0
-              })
-            )
-          }
-        </XYPlot>
+    <div className={ styles.contianer }>
+      <div className={ styles.inner }>
+        <div className={ styles.plotContainer }>
+          <p className={ styles.yAxisLabel }>{ yAxisTitle }</p>
+          <XYPlot { ...rest } onMouseLeave={ onMouseLeave }>
+            <HorizontalGridLines />
+            <VerticalGridLines />
+            <XAxis />
+            <YAxis tickFormat={ yTickFormat } />
+            { renderCrosshair() }
+            {
+              series.map(
+                (s, i) => renderSeries({
+                  ...s,
+                  isFirst: i === 0
+                })
+              )
+            }
+          </XYPlot>
+          <p className={ styles.xAxisLabel }>{ xAxisTitle }</p>
+        </div>
         <Legend
           title={ legendTitle }
           items={
@@ -113,8 +112,7 @@ const Plot = ({
           }
         />
       </div>
-      <p className={ styles.xAxisLabel }>{ xAxisTitle }</p>
-    </Centered>
+    </div>
   );
 };
 

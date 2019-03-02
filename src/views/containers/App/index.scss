@@ -15,8 +15,17 @@ code {
     monospace;
 }
 
+h1, h2, h3, h4, h5, h6 {
+  color: #2d2d2d;
+  font-size: 24px;
+  font-family: 'Libre Baskerville', serif;
+  font-weight: 400;
+  margin: 16px 0;
+}
+
 p {
   color: #6b6b76;
   font-size: 11px;
+  font-family: 'Libre Franklin', sans-serif;
   margin: 0;
 }
