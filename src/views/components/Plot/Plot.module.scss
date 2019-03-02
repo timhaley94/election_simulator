@@ -1,19 +1,5 @@
 .container {
   display: flex;
-  justify-content: center;
-  flex-direction: column;
-  align-items: center;
-}
-
-.inner {
-  display: flex;
-  justify-content: center;
-  flex-direction: row;
-  align-items: flex-start;
-}
-
-.plotContainer {
-  display: flex;
   flex-direction: column;
 }
 
@@ -33,4 +19,8 @@
   @extend %axisLabel;
   align-self: flex-start;
   margin-bottom: 14px;
+}
+
+.sidebar {
+  margin-left: 10px;
 }

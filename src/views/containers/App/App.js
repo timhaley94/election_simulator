@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { simulate, setWeight as rawSetWeight } from '../../../models';
 import { useOnMount, useTicker } from '../../hooks';
-import { Controls, Graph } from '..';
+import { Graph, Sidebar } from '..';
 import styles from './App.module.scss';
 import './index.scss';
 
@@ -56,17 +56,25 @@ const App = () => {
           id. Etiam luctus sollicitudin orci.
         </p>
       </div>
-      <Graph
-        tick={ tick }
-        iterations={ iterations }
-        history={ simulation.get('history') }
-        parties={ simulation.get('parties') }
-      />
-      <Controls
-        weights={ simulation.get('voterTypeDistribution') }
-        setWeight={ setWeight }
-        reset={ reset }
-      />
+      <div className={ styles.simulation }>
+        <div className={ styles.simulationInner }>
+          <Graph
+            reset={ reset }
+            weights={ simulation.get('voterTypeDistribution') }
+            setWeight={ setWeight }
+            tick={ tick }
+            iterations={ iterations }
+            history={ simulation.get('history') }
+            parties={ simulation.get('parties') }
+          />
+          <Sidebar
+            parties={ simulation.get('parties') }
+            reset={ reset }
+            weights={ simulation.get('voterTypeDistribution') }
+            setWeight={ setWeight }
+          />
+        </div>
+      </div>
     </div>
   );
 }

@@ -4,7 +4,10 @@ import { List, Map } from 'immutable';
 import { listOf } from '../../../utils';
 import { Plot } from '../../components';
 
-const Simulation = ({
+const Graph = ({
+  reset,
+  weights,
+  setWeight,
   tick,
   iterations,
   parties: rawParties,
@@ -85,15 +88,15 @@ const Simulation = ({
   );
 };
 
-Simulation.propTypes = {
+Graph.propTypes = {
   tick: PropTypes.number.isRequired,
   iterations: PropTypes.number.isRequired,
   parties: PropTypes.instanceOf(Map),
   history: PropTypes.instanceOf(List)
 };
 
-Simulation.defaultProps = {
+Graph.defaultProps = {
   history: null
 };
 
-export default Simulation;
+export default Graph;

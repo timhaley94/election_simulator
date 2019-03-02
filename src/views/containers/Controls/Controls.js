@@ -1,15 +1,22 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Button, Slider } from '../../components';
+import styles from './Controls.module.scss';
 
 const Controls = ({ weights, setWeight, reset }) => (
-  <div>
-    <div>
+  <div className={ styles.container }>
+    <p className={ styles.title }>Voter Strategies</p>
+    <div className={ styles.sliders }>
       {
         weights.map(
           entry => (
-            <div key={ `slider--${entry.get('type')}` }>
-              <p>{ entry.get('name') } Strategy:</p>
+            <div
+              className={ styles.sliderContainer }
+              key={ `slider--${entry.get('type')}` }
+            >
+              <p className={ styles.sliderLabel }>
+                { entry.get('name') }
+              </p>
               <Slider
                 value={ entry.get('value') }
                 onChange={
@@ -24,9 +31,12 @@ const Controls = ({ weights, setWeight, reset }) => (
         )
       }
     </div>
-    <Button onClick={ reset }>
-      Simulate
-    </Button>
+    <div className={ styles.buttonContainer }>
+      <Button onClick={ reset }
+      >
+        Simulate
+      </Button>
+    </div>
   </div>
 );
 

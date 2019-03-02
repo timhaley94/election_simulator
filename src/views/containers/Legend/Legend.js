@@ -3,11 +3,11 @@ import PropTypes from 'prop-types';
 import { capitalizeFirstLetter } from '../../../utils'
 import styles from './Legend.module.scss';
 
-const Legend = ({ title, items }) => (
+const Legend = ({ parties }) => (
   <ul className={ styles.container }>
-    <p className={ styles.title }>{ title }</p>
+    <p className={ styles.title }>Parties</p>
     {
-      items.map(
+      parties.map(
         ({ name, color }) => (
           <li
             key={ `legend--item--${name}` }
@@ -28,13 +28,12 @@ const Legend = ({ title, items }) => (
 );
 
 Legend.propTypes = {
-  title: PropTypes.string.isRequired,
-  items: PropTypes.arrayOf(
+  parties: PropTypes.arrayOf(
     PropTypes.shape({
       name: PropTypes.string.isRequired,
       color: PropTypes.string.isRequired
     })
-  ).isRequired
+  ).isRequired,
 };
 
 export default Legend;

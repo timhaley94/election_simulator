@@ -9,7 +9,7 @@ import {
   Crosshair,
   LineSeries
 } from 'react-vis';
-import { Legend, Tooltip } from '..';
+import { Tooltip } from '..';
 import styles from './Plot.module.scss';
 
 const Plot = ({
@@ -79,39 +79,24 @@ const Plot = ({
   };
 
   return (
-    <div className={ styles.contianer }>
-      <div className={ styles.inner }>
-        <div className={ styles.plotContainer }>
-          <p className={ styles.yAxisLabel }>{ yAxisTitle }</p>
-          <XYPlot { ...rest } onMouseLeave={ onMouseLeave }>
-            <HorizontalGridLines />
-            <VerticalGridLines />
-            <XAxis />
-            <YAxis tickFormat={ yTickFormat } />
-            { renderCrosshair() }
-            {
-              series.map(
-                (s, i) => renderSeries({
-                  ...s,
-                  isFirst: i === 0
-                })
-              )
-            }
-          </XYPlot>
-          <p className={ styles.xAxisLabel }>{ xAxisTitle }</p>
-        </div>
-        <Legend
-          title={ legendTitle }
-          items={
-            series.map(
-              ({ name, color }) => ({
-                name,
-                color
-              })
-            )
-          }
-        />
-      </div>
+    <div className={ styles.container }>
+      <p className={ styles.yAxisLabel }>{ yAxisTitle }</p>
+      <XYPlot { ...rest } onMouseLeave={ onMouseLeave }>
+        <HorizontalGridLines />
+        <VerticalGridLines />
+        <XAxis />
+        <YAxis tickFormat={ yTickFormat } />
+        { renderCrosshair() }
+        {
+          series.map(
+            (s, i) => renderSeries({
+              ...s,
+              isFirst: i === 0
+            })
+          )
+        }
+      </XYPlot>
+      <p className={ styles.xAxisLabel }>{ xAxisTitle }</p>
     </div>
   );
 };
