@@ -9,3 +9,4 @@ TODO
 - Start/stop/step/reset controls
 - Allow distribution to be updated in real time
 - Add/remove party controls
+- Optimize for mobile

@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
+import Ribbon from "react-github-ribbon";
 import { simulate, setWeight as rawSetWeight } from '../../../models';
 import { useOnMount, useTicker } from '../../hooks';
-import { Graph, Sidebar } from '..';
+import { Footer, Graph, Sidebar } from '..';
 import styles from './App.module.scss';
 import './index.scss';
 
@@ -42,6 +43,12 @@ const App = () => {
 
   return (
     <div className={ styles.container }>
+      <Ribbon
+        user="timhaley94"
+        repo="election_simulator"
+        fill="2d2d2d"
+        color="white"
+      />
       <div className={ styles.intro }>
         <h1 className={ styles.title } >Election Simulator</h1>
         <p className={ styles.description }>
@@ -75,6 +82,7 @@ const App = () => {
           />
         </div>
       </div>
+      <Footer />
     </div>
   );
 }
