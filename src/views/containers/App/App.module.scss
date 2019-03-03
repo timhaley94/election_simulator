@@ -1,7 +1,7 @@
 @import "~react-vis/dist/style";
 
 .container {
-  margin: 85px 20px 20px 20px;
+  margin: 65px 20px 20px 20px;
 }
 
 .intro {
@@ -10,7 +10,7 @@
   justify-content: center;
   align-items: center;
   max-width: 600px;
-  margin: 0 auto 50px auto;
+  margin: 0 auto 40px auto;
 }
 
 .title {
@@ -21,6 +21,7 @@
   margin: 10px 0;
   line-height: 1.7;
   color: #424249;
+  align-self: flex-start;
 }
 
 .simulation {

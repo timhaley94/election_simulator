@@ -1,5 +1,5 @@
 .container {
-  width: 245px;
+  width: 255px;
   border: 2px solid #e6e6e9;
   padding: 4px 6px;
   background-color: white;
@@ -22,11 +22,13 @@
 .sliderContainer {
   display: flex;
   flex-direction: row;
+  justify-content: space-between;
 }
 
 .sliderLabel {
   margin-right: 7px;
   min-width: 105px;
+  display: flex;
 }
 
 .buttonContainer {
