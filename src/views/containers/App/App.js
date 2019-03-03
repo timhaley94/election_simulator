@@ -70,7 +70,7 @@ const App = () => {
         <p className={ styles.description }>
           This simulator seeks to explore political parties, Duverger's law, and FPTP.{ ' ' }
           We've provided a few naive models of voter behavior and controls that allow you{ ' ' }
-          to tweak how many voters will exhibit a behavior.{ ' ' }
+          to tweak how many voters will exhibit a given behavior.{ ' ' }
           Each election in the simulation, voters use their personal preferences, their voting{ ' ' }
           strategy, and the results from previous iterations to cast their vote, giving us{ ' ' }
           a glimpse into how party prominence can evolve over time.
