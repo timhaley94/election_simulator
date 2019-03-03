@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { List, Map } from 'immutable';
-import { listOf } from '../../../utils';
+import { listOf, multiples } from '../../../utils';
 import { Plot } from '../../components';
 
 const Graph = ({
@@ -78,6 +78,7 @@ const Graph = ({
       xDomain={[1, iterations]}
       yDomain={[0, 1]}
       yTickFormat={ n => Math.floor(n * 100) }
+      xTickValues={ multiples(1, iterations, 3) }
       legendTitle="Parties"
       series={
         parties

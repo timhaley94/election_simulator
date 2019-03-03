@@ -33,3 +33,7 @@ export function formatPercent(num) {
   const shifted = ((num/1) * 100).toFixed(0);
   return `${shifted}%`;
 }
+
+export function multiples(start, stop, step) {
+  return Range(start, stop + step, step).toJS()
+}

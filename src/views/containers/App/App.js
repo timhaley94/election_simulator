@@ -7,7 +7,7 @@ import styles from './App.module.scss';
 import './index.scss';
 
 const App = () => {
-  const iterations = 30;
+  const iterations = 31;
 
   const [simulation, setSimulation] = useState(null);
   const { tick, reset: resetTicker } = useTicker(iterations);

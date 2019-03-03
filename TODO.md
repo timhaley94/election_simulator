@@ -1,6 +1,5 @@
 TODO
 - Write up title and body content
-- Fix the problem where the first vertical tick mark is too close
 - Make party colors match vegetables
 - Improve the look of the controls
 - Help text for each voter strategy

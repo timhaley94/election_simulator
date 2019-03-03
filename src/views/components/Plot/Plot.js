@@ -16,6 +16,7 @@ const Plot = ({
   xAxisTitle,
   yAxisTitle,
   yTickFormat,
+  xTickValues,
   legendTitle,
   series,
   ...rest
@@ -83,8 +84,8 @@ const Plot = ({
       <p className={ styles.yAxisLabel }>{ yAxisTitle }</p>
       <XYPlot { ...rest } onMouseLeave={ onMouseLeave }>
         <HorizontalGridLines />
-        <VerticalGridLines />
-        <XAxis />
+        <VerticalGridLines tickValues={ xTickValues } />
+        <XAxis tickValues={ xTickValues } />
         <YAxis tickFormat={ yTickFormat } />
         { renderCrosshair() }
         {
@@ -105,6 +106,9 @@ Plot.propTypes = {
   xAxisTitle: PropTypes.string.isRequired,
   yAxisTitle: PropTypes.string.isRequired,
   yTickFormat: PropTypes.func.isRequired,
+  xTickValues: PropTypes.arrayOf(
+    PropTypes.number
+  ).isRequired,
   legendTitle: PropTypes.string.isRequired,
   series: PropTypes.arrayOf(
     PropTypes.shape({
