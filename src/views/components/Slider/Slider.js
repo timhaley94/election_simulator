@@ -1,4 +1,5 @@
 import React from 'react';
+import TooltipItem from './ToolTip';
 
 const Slider = ({
   max,
@@ -19,6 +20,7 @@ const Slider = ({
       value={ value }
       onChange={ onChange }
     />
+    <TooltipItem />
   );
 };
 
