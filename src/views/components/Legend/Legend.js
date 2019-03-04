@@ -31,9 +31,10 @@ Legend.propTypes = {
   title: PropTypes.string.isRequired,
   items: PropTypes.arrayOf(
     PropTypes.shape({
-      name: PropTypes.string.isRequired
+      name: PropTypes.string.isRequired,
+      color: PropTypes.string.isRequired
     })
-  )
+  ).isRequired
 };
 
 export default Legend;
