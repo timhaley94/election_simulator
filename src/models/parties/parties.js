@@ -6,7 +6,7 @@ export const DEFAULT_PARTY_COUNT = 5;
 export const MAX_PARTY_COUNT = 10;
 
 export function makeParties() {
-  let potentialParties = List([
+  let potentialParties = Set([
     {id: 'asparagus',
     color: 'rgb(151, 190,17)'
     },
@@ -24,9 +24,6 @@ export function makeParties() {
     },
     {id: 'carrot',
     color: 'rgb(255,108,0)'
-    },
-    {id: 'onion',
-    color: 'rgb(223,223,172)'
     },
     {id: 'spinach',
     color: 'rgb(40,89,12)'
