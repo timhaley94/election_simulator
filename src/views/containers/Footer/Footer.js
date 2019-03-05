@@ -10,7 +10,7 @@ const chattHref = "https://www.google.com/maps/place/Chattanooga,+TN/@35.0979732
 const Footer = () => (
   <footer className={ styles.container }>
     <p>
-      Made by <Link href={ timHref }>Tim Haley</Link> with the help of <Link href={ eliasHref }>Elias Wood</Link> with { ' ' }
+      Made by <Link href={ timHref }>Tim Haley</Link> and <Link href={ eliasHref }>Elias Wood</Link> with { ' ' }
       <i className={ styles.heart + ' icon ion-heart' }></i>{ ' ' }
       in <Link href={ chattHref }>Chattanooga, TN</Link>
       with { ' ' }
