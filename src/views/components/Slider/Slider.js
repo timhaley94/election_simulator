@@ -19,6 +19,7 @@ const Slider = ({
       value={ value }
       onChange={ onChange }
     />
+    <TooltipItem />
   );
 };
 
