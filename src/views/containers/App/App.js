@@ -9,6 +9,8 @@ import './index.scss';
 
 const demHref = 'https://democrats.org/';
 const gopHref = 'https://www.gop.com/';
+const duvergerHref = 'https://en.wikipedia.org/wiki/Duverger%27s_law';
+const fptpHref = 'https://en.wikipedia.org/wiki/First-past-the-post_voting';
 
 const App = () => {
   const iterations = 31;
@@ -63,9 +65,9 @@ const App = () => {
           Despite the existence of alternatives, third parties rarely{ ' ' }
           gain significant traction. Thus, the entrenched powers are all but guaranteed to stay in place.{ ' ' }
           As frustrating as this reality is, it's actually not surprising.{ ' ' }
-          In fact, according to <Link>Duverger's law</Link>{ ' ' }
+          In fact, according to <Link href={ duvergerHref }>Duverger's law</Link>{ ' ' }
           it's an inherent feature of the system we use for elections:{ ' ' }
-          <Link>First Passed the Post (FPTP)</Link>.
+          <Link href={ fptpHref }>First Passed the Post (FPTP)</Link>.
         </p>
         <p className={ styles.description }>
           This simulator seeks to explore political parties, Duverger's law, and FPTP.{ ' ' }

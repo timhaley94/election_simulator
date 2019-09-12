@@ -5,7 +5,7 @@ export const MIN_PARTY_COUNT = 2;
 export const DEFAULT_PARTY_COUNT = 5;
 export const MAX_PARTY_COUNT = 10;
 
-export function makeParties() {
+export function makeParties(count = DEFAULT_PARTY_COUNT) {
   let potentialParties = Set([
     {
       id: 'asparagus',
@@ -44,6 +44,7 @@ export function makeParties() {
       color: 'rgb(102,0,102)'
     }
   ]);
+
   return Map(
     listOf(
       () => {
@@ -56,7 +57,7 @@ export function makeParties() {
         const value = Map({ id, color });
         return List([id, value]);
       },
-      DEFAULT_PARTY_COUNT
+      count
     )
   );
 }
