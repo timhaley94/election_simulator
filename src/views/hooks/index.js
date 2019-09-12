@@ -9,7 +9,8 @@ export function useOnMount(fn) {
         fn();
         setIsMounted(true);
       }
-    }
+    },
+    [isMounted, fn]
   );
 }
 
