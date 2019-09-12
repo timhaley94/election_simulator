@@ -27,6 +27,6 @@
     "not op_mini all"
   ],
   "engines": {
-    "node": ">=8.11.2"
+    "node": ">=10.15.3"
   }
 }
