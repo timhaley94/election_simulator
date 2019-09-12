@@ -13,7 +13,6 @@ const Footer = () => (
       Made by <Link href={ timHref }>Tim Haley</Link> and <Link href={ eliasHref }>Elias Wood</Link> with { ' ' }
       <i className={ styles.heart + ' icon ion-heart' }></i>{ ' ' }
       in <Link href={ chattHref }>Chattanooga, TN</Link>
-      with { ' ' }
     </p>
   </footer>
 );

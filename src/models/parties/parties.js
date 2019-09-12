@@ -1,63 +1,40 @@
-import { List, Map, Set } from 'immutable';
-import { listOf } from '../../utils';
+import { Map } from 'immutable';
 
-export const MIN_PARTY_COUNT = 2;
 export const DEFAULT_PARTY_COUNT = 5;
-export const MAX_PARTY_COUNT = 10;
+
+const parties = [
+  {
+    id: 'Blue',
+    color: '#19CDD7'
+  },
+  {
+    id: 'Brown',
+    color: '#DDB27C'
+  },
+  {
+    id: 'Green',
+    color: '#4DC19C'
+  },
+  {
+    id: 'Orange',
+    color: '#FF991F'
+  },
+  {
+    id: 'Purple',
+    color: '#223F9A'
+  }
+];
 
 export function makeParties(count = DEFAULT_PARTY_COUNT) {
-  let potentialParties = Set([
-    {
-      id: 'asparagus',
-      color: 'rgb(151, 190,17)'
-    },
-    {
-      id: 'corn' ,
-      color: 'rgb(255,255,51)'
-    },
-    {
-      id: 'cabbage',
-      color: 'rgb(204,255,153)'
-    },
-    {
-      id: 'turnip',
-      color: 'rgb(204,0,204)'
-    },
-    {
-      id: 'radish',
-      color: 'rgb(255,0,127)'
-    },
-    {
-      id: 'carrot',
-      color: 'rgb(255,108,0)'
-    },
-    {
-      id: 'spinach',
-      color: 'rgb(40,89,12)'
-    },
-    {
-      id: 'mushroom',
-      color: 'rgb(255,204,153)'
-    },
-    {
-      id: 'eggplant',
-      color: 'rgb(102,0,102)'
-    }
-  ]);
-
   return Map(
-    listOf(
-      () => {
-        const party = potentialParties.maxBy(Math.random);
-        potentialParties = potentialParties.remove(party);
-
-        const id = party.id;
-        const color = party.color
-
-        const value = Map({ id, color });
-        return List([id, value]);
-      },
-      count
-    )
+    parties
+      .slice(0, count)
+      .reduce(
+        (acc, party) => ({
+          ...acc,
+          [party.id]: Map(party)
+        }),
+        {}
+      )
   );
 }

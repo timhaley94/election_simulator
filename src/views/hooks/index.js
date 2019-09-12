@@ -21,7 +21,7 @@ export function useTicker(initialLength) {
   const [length, setLength] = useState(initialLength);
   const [tick, setTick] = useState(0);
   const [isRunning, setIsRunning] = useState(false);
-  const [timer, setTimer] = useState(null);
+  const [, setTimer] = useState(null);
 
   const stop = () => {
     setIsRunning(false);
